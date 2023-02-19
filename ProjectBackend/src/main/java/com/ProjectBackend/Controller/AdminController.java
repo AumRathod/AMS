@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ProjectBackend.Service.AssetServices;
+import com.ProjectBackend.Service.EmployeeServices;
 import com.ProjectBackend.model.asset.AddAssetClassInfo;
 import com.ProjectBackend.model.asset.AddAssetInfo;
 import com.ProjectBackend.model.asset.AssetClass;
 import com.ProjectBackend.model.asset.AssetInfo;
+import com.ProjectBackend.model.employee.Employee;
 
 @RequestMapping("/admin")
 @RestController
@@ -24,6 +26,9 @@ public class AdminController {
 
 	@Autowired
 	AssetServices assetServices;
+
+	@Autowired
+	EmployeeServices employeeServices;
 
 	@GetMapping("")
 	public ResponseEntity<String> testConnection() {
@@ -54,11 +59,32 @@ public class AdminController {
 
 	@GetMapping("/getAllClasses")
 	public ResponseEntity<List<AssetClass>> getAllClasses() {
-		return new ResponseEntity<List<AssetClass>>(assetServices.getAllClasses(), HttpStatus.OK);
+		return new ResponseEntity<List<AssetClass>>(assetServices.getAllAssetClasses(), HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllAssets")
 	public ResponseEntity<List<AssetInfo>> getAllAssets() {
-		return new ResponseEntity<List<AssetInfo>>(assetServices.getAllInfo(), HttpStatus.OK);
+		return new ResponseEntity<List<AssetInfo>>(assetServices.getAllAssetsInfo(), HttpStatus.OK);
+	}
+
+	@PostMapping("/addEmployee")
+	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+		Employee ret = employeeServices.addNewEmployee(employee);
+		if (ret != null)
+			return new ResponseEntity<Employee>(ret, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@GetMapping("/getEmployee/{empId}")
+	public ResponseEntity<Employee> getEmployeeDetails(@PathVariable String empId) {
+		Employee ret = employeeServices.getEmployee(empId);
+		if (ret == null)
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Employee>(ret, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAllEmployees")
+	public ResponseEntity<List<Employee>> getAllEmployees(){
+		return new ResponseEntity<List<Employee>>(employeeServices.getAllEmployees(),HttpStatus.OK);
 	}
 }

@@ -1,24 +1,32 @@
 package com.ProjectBackend.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.Id;
-//import jakarta.persistence.Table;
 
 @Document
+@Component
 public class LoginColl {
     
-    private int id;
+    private String id;
     private String name;
     private String password;
     private String type;
+    private String token;
 
-    public int getId() {
+    public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

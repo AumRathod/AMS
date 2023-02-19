@@ -8,10 +8,15 @@ import com.ProjectBackend.model.asset.AssetClass;
 import com.ProjectBackend.model.asset.AssetInfo;
 
 public interface AssetServices {
+
 	public void insertNewAsset(AddAssetInfo asset);
+
+	public List<AssetInfo> getAllAssetsInfo();
+
 	public void insertNewAssetClass(AddAssetClassInfo asset);
+
 	public AssetClass getAssetClass(String name);
-	public List<AssetClass> getAllClasses();
-	public List<AssetInfo> getAllInfo();
-	
+
+	public List<AssetClass> getAllAssetClasses();
+
 }

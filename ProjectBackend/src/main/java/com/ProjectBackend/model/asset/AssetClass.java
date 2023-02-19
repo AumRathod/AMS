@@ -2,10 +2,7 @@ package com.ProjectBackend.model.asset;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import jakarta.annotation.Generated;
 
 @Document(collection = "assetClass")
 public class AssetClass {

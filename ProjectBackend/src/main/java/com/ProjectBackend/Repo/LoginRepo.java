@@ -14,4 +14,5 @@ public interface LoginRepo extends MongoRepository<LoginColl , Integer>
 //	LoginColl check(String name,String password);
 	
 	LoginColl findByName(String name);
+	LoginColl findByToken(String token);
 }
